@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# get-exif-data
+# Gets EXIF data from a photo and displays it in a text info box.
+# Luke Loughead 2023-11-13
+
+for file in `echo $*`
+{
+	exiftool $file | zenity --text-info
+}

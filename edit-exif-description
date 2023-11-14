@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# edit-exif-description
+# A Nautilus script for editing a photo's EXIF description field.
+# Luke Loughead 2023-11-13
+
+
+for file in `echo $*`
+{
+	desc=$(exiftool -description $file|sed 's/^[^:]*: *//')
+	newdesc=$(echo $desc | zenity --width=600 --height=300 --text-info --editable --title="Editing EXIF description of $file:")
+	if [ $? -eq "0" ]; then
+		newdesc=$(echo $newdesc|sed -E 's/[[:space:]]+$/\\n/')
+		exiftool -P -m -overwrite_original -description="$newdesc" $file
+	else
+	fi
+}
