@@ -12,6 +12,5 @@ for file in `echo $*`
 	if [ $? -eq "0" ]; then
 		newdesc=$(echo $newdesc|sed -E 's/[[:space:]]+$/\\n/')
 		exiftool -P -m -overwrite_original -description="$newdesc" $file
-	else
 	fi
 }
